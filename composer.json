@@ -1,0 +1,15 @@
+{
+    "name": "ThibaudLafont/redis-broker",
+    "authors": [
+        {
+            "name": "ThibaudLafont",
+            "email": "thibaud@sysmod.fr"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "RedisBroker\\" : "RedisBroker/"
+        }
+    }
+}
