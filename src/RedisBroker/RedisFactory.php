@@ -23,6 +23,8 @@ final class RedisFactory {
 	 */
 	private static $_instance;
 
+	/* ------------------------ MAGIC ------------------------*/
+
 	/**
 	 * RedisFactory constructor.
 	 * @param string $redis_host
@@ -35,6 +37,11 @@ final class RedisFactory {
 			self::SetRedisPort($redis_port);
 	}
 
+	/* ------------------------ METHODS ------------------------*/
+
+	/**
+	 * @return RedisFactory
+	 */
 	public static function GetInstance() {
 		if (self::$_instance === null) {
 			self::$_instance = new RedisFactory();
@@ -42,21 +49,38 @@ final class RedisFactory {
 		return self::$_instance;
 	}
 
+	/**
+	 * @return RedisPublisher
+	 */
 	public function CreatePublisher() {
 		return new RedisPublisher($this->CreateConnector());
 	}
 
-	public function CreateSubscriber($channel, $subscriber_class) {
-		return new $subscriber_class($this->CreateConnector(), $channel);
+	/**
+	 * @param string $channel
+	 * @param string $subs_classname
+	 * @return mixed
+	 */
+	public function CreateSubscriber($channel, $subs_classname) {
+		return new $subs_classname($this->CreateConnector(), $channel);
 	}
 
+	/**
+	 * @param array $message_content
+	 * @return RedisMessage
+	 */
 	public function CreateMessage(array $message_content) {
 		return new RedisMessage($message_content);
 	}
 
+	/**
+	 * @return RedisConnection
+	 */
 	private function CreateConnector() {
-		return new RedisConnection(self::$redis_host, self::$redis_port);
+		return new RedisConnection(self::GetRedisHost(), self::GetRedisPort());
 	}
+
+	/* ------------------------ GETTERS / SETTERS ------------------------*/
 
 	/**
 	 * @return string
