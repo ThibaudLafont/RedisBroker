@@ -2,9 +2,9 @@
 
 namespace App;
 
-use RedisBroker\RedisConsumer;
+use RedisBroker\RedisSubscriber;
 
-class AppConsumer extends RedisConsumer {
+class AppSubscriber extends RedisSubscriber {
 
 	/**
 	 * @param string $message

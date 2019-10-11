@@ -5,10 +5,10 @@ namespace RedisBroker;
 use Redis;
 
 /**
- * Class RedisConsumer
+ * Class RedisSubscriber
  * @package RedisBroker
  */
-abstract class RedisConsumer {
+abstract class RedisSubscriber {
 
 	/**
 	 * @var Redis
@@ -28,7 +28,7 @@ abstract class RedisConsumer {
 	/* ------------------------ MAGIC ------------------------*/
 
 	/**
-	 * RedisConsumer constructor.
+	 * RedisSubscriber constructor.
 	 * @param RedisConnection $redis_handler
 	 * @param string $channel
 	 */
