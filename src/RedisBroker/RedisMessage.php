@@ -18,7 +18,7 @@ class RedisMessage {
 	/**
 	 * @var array
 	 */
-	private $message = [];
+	private $content = [];
 
 	/* ------------------------ MAGIC ------------------------*/
 
@@ -29,7 +29,7 @@ class RedisMessage {
 	public function __construct(array $message = []) {
 		$this->SetId();
 		if($message !== '') {
-			$this->SetMessage($message);
+			$this->SetContent($message);
 		}
 	}
 
@@ -42,7 +42,7 @@ class RedisMessage {
 	public function Serialize () {
 		$ret = json_encode([
 			'id' => $this->GetId(),
-			'message' => $this->GetMessage()
+			'content' => $this->GetContent()
 		], true);
 		if($ret !== false) {
 			return $ret;
@@ -66,23 +66,23 @@ class RedisMessage {
 	/**
 	 * @return array
 	 */
-	public function GetMessage() {
-		return $this->message;
+	public function GetContent() {
+		return $this->content;
 	}
 
 	/**
-	 * @param array $message
+	 * @param array $content
 	 */
-	public function SetMessage(array $message) {
-		$this->message = $message;
+	public function SetContent(array $content) {
+		$this->content = $content;
 	}
 
 	/**
 	 * @param string $key
 	 * @param string $value
 	 */
-	public function AddToMessage($key, $value) {
-		$this->GetMessage()[$key] = $value;
+	public function AddToContent($key, $value) {
+		$this->GetContent()[$key] = $value;
 	}
 
 }

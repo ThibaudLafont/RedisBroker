@@ -10,7 +10,7 @@ try {
 	$redis_handler = new RedisConnection('host.docker.internal', 63);
 
 	for ($i = 0 ; $i<10 ; $i++) {
-		$message = new RedisMessage(['text' => 'Salut']);
+		$message = new RedisMessage(['text' => 'Salut', 'time' => time()]);
 
 		$publisher = new RedisPublisher($redis_handler);
 		$publisher->Publish('channel', $message);

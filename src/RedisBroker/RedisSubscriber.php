@@ -50,10 +50,11 @@ abstract class RedisSubscriber {
 
 	/**
 	 * Custom consume method for ProcessMessage callback
-	 * @param string $message
+	 * @param string $id
+	 * @param array $content
 	 * @return mixed
 	 */
-	protected abstract function Consume($message);
+	protected abstract function Consume($id, array $content);
 
 	/* ------------------------ METHODS ------------------------*/
 
@@ -111,7 +112,7 @@ abstract class RedisSubscriber {
 		if($message !== false) {
 			$message = json_decode($message, true);
 			if($message !== false) {
-				$this->Consume($message);
+				$this->Consume($message['id'], $message['content']);
 			} else throw new Exception('Error while decoding json message');
 		}
 	}
