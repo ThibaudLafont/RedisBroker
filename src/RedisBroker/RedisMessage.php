@@ -13,20 +13,20 @@ class RedisMessage {
 	/**
 	 * @var int
 	 */
-	private $id;
+	private $id = '';
 
 	/**
-	 * @var string
+	 * @var array
 	 */
-	private $message;
+	private $message = [];
 
 	/* ------------------------ MAGIC ------------------------*/
 
 	/**
 	 * RedisMessage constructor.
-	 * @param string $message
+	 * @param array $message
 	 */
-	public function __construct($message = '') {
+	public function __construct(array $message = []) {
 		$this->SetId();
 		if($message !== '') {
 			$this->SetMessage($message);
@@ -64,17 +64,25 @@ class RedisMessage {
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
 	public function GetMessage() {
 		return $this->message;
 	}
 
 	/**
-	 * @param string $message
+	 * @param array $message
 	 */
-	public function SetMessage($message) {
+	public function SetMessage(array $message) {
 		$this->message = $message;
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $value
+	 */
+	public function AddToMessage($key, $value) {
+		$this->GetMessage()[$key] = $value;
 	}
 
 }

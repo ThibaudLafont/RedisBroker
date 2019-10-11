@@ -13,17 +13,17 @@ abstract class RedisConsumer {
 	/**
 	 * @var Redis
 	 */
-	private $redis_conn;
+	protected $redis_conn = null;
 
 	/**
 	 * @var Redis
 	 */
-	private $subs_conn;
+	protected $subs_conn = null;
 
 	/**
 	 * @var string
 	 */
-	private $channel;
+	protected $channel = '';
 
 	/* ------------------------ MAGIC ------------------------*/
 

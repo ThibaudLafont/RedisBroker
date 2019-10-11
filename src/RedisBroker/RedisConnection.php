@@ -13,12 +13,17 @@ class RedisConnection {
 	/**
 	 * @var string
 	 */
-	private $host;
+	private $host = '';
 
 	/**
 	 * @var int
 	 */
-	private $port;
+	private $port = '';
+
+	/**
+	 * @var RedisConnection
+	 */
+	private static $_instance = null;
 
 	/* ------------------------ MAGIC ------------------------*/
 
@@ -35,9 +40,24 @@ class RedisConnection {
 	/* ------------------------ METHODS ------------------------*/
 
 	/**
+	 * Singleton implementation
+	 *
+	 * @param string $host
+	 * @param string $port
+	 * @return RedisConnection
+	 */
+	public static function GetInstance($host, $port) {
+		if (self::$_instance === null) {
+			self::$_instance = new RedisConnection($host, $port);
+		}
+		return self::$_instance;
+	}
+
+	/**
 	 * @return Redis
 	 */
 	public function CreateConnection() {
+		// TODO : Handle redis connection fail
 		$redis = new Redis();
 		$redis->connect($this->GetHost(), $this->GetPort());
 		return $redis;

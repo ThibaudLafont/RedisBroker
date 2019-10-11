@@ -1,5 +1,5 @@
 {
-    "name": "ThibaudLafont/redis-broker",
+    "name": "thibaudlafont/redis-broker",
     "authors": [
         {
             "name": "ThibaudLafont",
@@ -9,7 +9,8 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "RedisBroker\\" : "RedisBroker/"
+            "RedisBroker\\" : "src/RedisBroker/",
+            "App\\" : "example/app/"
         }
     }
 }
