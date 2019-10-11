@@ -8,7 +8,7 @@ use Exception;
  * Class RedisPublisher
  * @package RedisBroker
  */
-class RedisPublisher {
+final class RedisPublisher {
 
 	/**
 	 * @var Redis

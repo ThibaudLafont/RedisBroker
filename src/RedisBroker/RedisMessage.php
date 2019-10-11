@@ -8,7 +8,7 @@ use Exception;
  * Class RedisMessage
  * @package RedisBroker
  */
-class RedisMessage {
+final class RedisMessage {
 
 	/**
 	 * @var int

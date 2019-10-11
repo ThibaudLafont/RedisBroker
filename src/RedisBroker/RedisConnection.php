@@ -8,7 +8,7 @@ use Redis;
  * Class RedisConnection
  * @package RedisBroker
  */
-class RedisConnection {
+final class RedisConnection {
 
 	/**
 	 * @var string
