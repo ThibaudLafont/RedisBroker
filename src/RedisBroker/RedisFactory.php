@@ -59,7 +59,7 @@ final class RedisFactory {
 	/**
 	 * @param string $channel
 	 * @param string $subs_classname
-	 * @return mixed
+	 * @return RedisSubscriber
 	 */
 	public function CreateSubscriber($channel, $subs_classname) {
 		return new $subs_classname($this->CreateConnector(), $channel);

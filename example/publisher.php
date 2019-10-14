@@ -1,19 +1,17 @@
 <?php
 
-use RedisBroker\RedisConnection;
-use RedisBroker\RedisMessage;
-use RedisBroker\RedisPublisher;
+use RedisBroker\RedisFactory;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 try {
-	$redis_handler = new RedisConnection('host.docker.internal', 63);
+	$factory = RedisFactory::GetInstance();
 
-	for ($i = 0 ; $i<10 ; $i++) {
-		$message = new RedisMessage(['text' => 'Salut', 'time' => time()]);
+	for ($i = 0 ; $i<100 ; $i++) {
+		$factory->CreatePublisher()
+			->Publish('channel', $factory->CreateMessage(['text' => 'Salut', 'time' => time()]));
 
-		$publisher = new RedisPublisher($redis_handler);
-		$publisher->Publish('channel', $message);
+		sleep(45);
 	}
 } catch (RedisException $e) {
 	echo "<div style='color: red; font-size: 22px;'>{$e->getMessage()}</div>";

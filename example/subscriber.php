@@ -2,6 +2,7 @@
 
 use App\AppSubscriber;
 use RedisBroker\RedisConnection;
+use RedisBroker\RedisFactory;
 
 ini_set("default_socket_timeout", -1);
 set_time_limit(-1);
@@ -9,10 +10,10 @@ set_time_limit(-1);
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 try {
-	$redis_handler = new RedisConnection('host.docker.internal', 63);
-
-	$consumer = new AppSubscriber($redis_handler, 'channel');
-	$consumer->Subscribe();
+	RedisFactory::GetInstance()->CreateSubscriber(
+		'channel',
+		AppSubscriber::class
+	)->Subscribe();
 } catch (RedisException $e) {
 	echo 'Exception : ' . $e->getMessage() . "\n";
 }
